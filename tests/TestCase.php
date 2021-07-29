@@ -3,6 +3,7 @@
 namespace HandmadeWeb\StatamicCloudflare\Tests;
 
 use HandmadeWeb\StatamicCloudflare\ServiceProvider;
+use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 use Statamic\Extend\Manifest;
 use Statamic\Providers\StatamicServiceProvider;
@@ -38,6 +39,10 @@ class TestCase extends OrchestraTestCase
      */
     protected function getEnvironmentSetUp($app): void
     {
+        // make sure, our .env file is loaded
+        $app->useEnvironmentPath(__DIR__.'/../');
+        $app->bootstrapWith([LoadEnvironmentVariables::class]);
+
         parent::getEnvironmentSetUp($app);
 
         $app->make(Manifest::class)->manifest = [
@@ -70,5 +75,14 @@ class TestCase extends OrchestraTestCase
 
         // Assume the pro edition within tests
         $app['config']->set('statamic.editions.pro', true);
+
+        // Load statamic-cloudflare config.
+        $app['config']->set('statamic-cloudflare', require(__DIR__.'/../config/statamic-cloudflare.php'));
+
+        // Load root level statamic-cloudflare config.
+        $app['config']->set('statamic-cloudflare', array_merge(
+            $app['config']->get('statamic-cloudflare'),
+            require(__DIR__.'/../../../../config/statamic-cloudflare.php')
+        ));
     }
 }
