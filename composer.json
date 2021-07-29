@@ -1,0 +1,45 @@
+{
+    "name": "handmadeweb/statamic-cloudflare",
+    "license": "MIT",
+    "description": "",
+    "keywords": [
+        "statamic",
+        "statamic-addon",
+        "statamic-plugin",
+        "statamic-cache",
+        "cloudflare"
+    ],
+    "require": {
+        "php": "^7.3 || ^8.0",
+        "statamic/cms": "^3.1.2",
+        "cloudflare/sdk": "^1.2"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^4.0 || ^5.0 || ^6.0"
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "autoload": {
+        "psr-4": {
+            "HandmadeWeb\\StatamicCloudflare\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "HandmadeWeb\\StatamicCloudflare\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "statamic": {
+            "name": "Statamic Cloudflare",
+            "description": "Statamic Cloudflare addon"
+        },
+        "laravel": {
+            "providers": [
+                "HandmadeWeb\\StatamicCloudflare\\ServiceProvider"
+            ]
+        }
+    }
+}
