@@ -15,6 +15,15 @@ class ServiceProvider extends AddonServiceProvider
         \HandmadeWeb\StatamicCloudflare\Commands\CachePurgeEverything::class,
     ];
 
+    protected $listen = [
+        \Statamic\Events\EntrySaved::class => [
+            \HandmadeWeb\StatamicCloudflare\Listeners\PurgeEntryUrl::class,
+        ],
+        \Statamic\Events\EntryDeleted::class => [
+            \HandmadeWeb\StatamicCloudflare\Listeners\PurgeEntryUrl::class,
+        ],
+    ];
+
     public function boot()
     {
         parent::boot();
@@ -38,5 +47,17 @@ class ServiceProvider extends AddonServiceProvider
                 $router->post('/purgeAll', [CloudflareUtilityController::class, 'purgeAll'])->name('purgeAll');
             })
             ->register();
+    }
+
+    public function bootEvents()
+    {
+        $static_cacher = config('statamic.static_caching.strategy');
+
+        // If the static cache strategy is set to the Cloudflare Cacher, then remove listeners as the cacher will handle purges.
+        if (config("statamic.static_caching.strategies.{$static_cacher}.driver") === 'cloudflare') {
+            $this->listen = [];
+        }
+
+        parent::bootEvents();
     }
 }
