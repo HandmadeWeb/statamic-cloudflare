@@ -29,7 +29,14 @@ CLOUDFLARE_KEY=
 CLOUDFLARE_EMAIL=
 ```
 
-And configure your `zones` in your `statamic-cloudflare.php`
+And configure your `zones`, If you only need to specify a single zone, then you can add it to your `.env`
+
+```env
+CLOUDFLARE_ZONE_DOMAIN=
+CLOUDFLARE_ZONE_ID=
+```
+
+Otherwise you can specify multiple zones in your `statamic-cloudflare.php`
 
 ```php
     /*
@@ -44,7 +51,7 @@ And configure your `zones` in your `statamic-cloudflare.php`
      * 'example.com' => '023e105f4ecef8ad9ca31a8372d0c353'
      */
     'zones' => [
-        //
+        // env('CLOUDFLARE_ZONE_DOMAIN', null) => env('CLOUDFLARE_ZONE_ID', null),
     ],
 ```
 
