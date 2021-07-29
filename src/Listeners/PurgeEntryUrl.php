@@ -37,7 +37,7 @@ class PurgeEntryUrl
 
         // If zone exists, try to purge the url from it.
         if ($zone) {
-            $url = $site->absoluteUrl().Modify::value($event->entry->uri())->ensureLeft('/');
+            $url = $site->absoluteUrl().Modify::value($event->entry->url())->ensureLeft('/');
 
             if (Cloudflare::shouldQueue()) {
                 PurgeZone::dispatch($zone, [$url]);
