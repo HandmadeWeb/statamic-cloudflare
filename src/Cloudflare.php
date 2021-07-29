@@ -22,7 +22,7 @@ class Cloudflare
             static::$booted = true;
 
             static::$api = new CloudflareApi;
-            static::$zones = collect(static::config('zones', []));
+            static::$zones = collect(static::config('zones', []))->filter();
         }
     }
 
