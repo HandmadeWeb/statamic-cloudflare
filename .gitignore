@@ -2,7 +2,9 @@
 /vendor
 .DS_Store
 .env
+.env.testing
 .env.backup
+.phpunit.xml
 .phpunit.result.cache
 .php_cs.cache
 composer.lock
