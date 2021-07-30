@@ -2,6 +2,7 @@
 
 namespace HandmadeWeb\StatamicCloudflare;
 
+use Exception;
 use HandmadeWeb\StatamicCloudflare\Traits\RegistersCacher;
 use Statamic\Facades\Site as SiteFacade;
 use Statamic\Modifiers\Modify;
@@ -12,18 +13,40 @@ class Cloudflare
     use RegistersCacher;
 
     protected static $booted;
+    protected static $isConfigured;
+
     protected static $api;
     protected static $zones;
     protected static $zoneId;
 
     public static function boot()
     {
+        if (static::isNotConfigured()) {
+            throw new Exception('No Api connection has been configured for statamic-cloudflare.', 1);
+
+            return;
+        }
+
         if (! static::$booted) {
             static::$booted = true;
 
             static::$api = new CloudflareApi;
             static::$zones = collect(static::config('zones', []))->filter();
         }
+    }
+
+    public static function isConfigured(): bool
+    {
+        if (is_null(static::$isConfigured)) {
+            static::$isConfigured = static::config('email') && static::config('key');
+        }
+
+        return static::$isConfigured;
+    }
+
+    public static function isNotConfigured(): bool
+    {
+        return ! static::isConfigured();
     }
 
     public static function config($key = null, $default = null)

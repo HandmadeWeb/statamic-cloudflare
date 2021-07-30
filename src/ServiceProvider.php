@@ -39,6 +39,11 @@ class ServiceProvider extends AddonServiceProvider
             $this->listen = [];
         }
 
+        // Disable functionality if Cloudflare Api hasn't been configured.
+        if (Cloudflare::isNotConfigured()) {
+            $this->listen = [];
+        }
+
         parent::boot();
 
         $this->mergeConfigFrom(__DIR__.'/../config/statamic-cloudflare.php', 'statamic-cloudflare');
@@ -49,8 +54,10 @@ class ServiceProvider extends AddonServiceProvider
             ], 'config');
         }
 
-        Utility::make('cloudflare')
-        ->action([CloudflareUtilityController::class, 'index'])
+        // Enable functionality if Cloudflare Api has been configured.
+        if (Cloudflare::isConfigured()) {
+            Utility::make('cloudflare')
+            ->action([CloudflareUtilityController::class, 'index'])
             ->title(__('Cloudflare Manager'))
             ->icon('earth')
             ->navTitle(__('Cloudflare'))
@@ -60,5 +67,6 @@ class ServiceProvider extends AddonServiceProvider
                 $router->post('/purgeAll', [CloudflareUtilityController::class, 'purgeAll'])->name('purgeAll');
             })
             ->register();
+        }
     }
 }

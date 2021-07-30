@@ -32,6 +32,10 @@ class CachePurgeEverything extends Command
      */
     public function handle()
     {
+        if (Cloudflare::isNotConfigured()) {
+            return $this->error('No Api connection has been configured for statamic-cloudflare.');
+        }
+
         if (Cloudflare::zones()->isEmpty()) {
             return $this->error('Please supply a valid zone in the statamic-cloudflare config.');
         }
