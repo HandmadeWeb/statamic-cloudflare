@@ -26,6 +26,13 @@ class ServiceProvider extends AddonServiceProvider
 
     public function boot()
     {
+        $static_cacher = config('statamic.static_caching.strategy');
+
+        // If the static cache strategy is set to the Cloudflare Cacher, then remove listeners as the cacher will handle purges.
+        if (config("statamic.static_caching.strategies.{$static_cacher}.driver") === 'cloudflare') {
+            $this->listen = [];
+        }
+
         parent::boot();
 
         $this->mergeConfigFrom(__DIR__.'/../config/statamic-cloudflare.php', 'statamic-cloudflare');
@@ -47,17 +54,5 @@ class ServiceProvider extends AddonServiceProvider
                 $router->post('/purgeAll', [CloudflareUtilityController::class, 'purgeAll'])->name('purgeAll');
             })
             ->register();
-    }
-
-    public function bootEvents()
-    {
-        $static_cacher = config('statamic.static_caching.strategy');
-
-        // If the static cache strategy is set to the Cloudflare Cacher, then remove listeners as the cacher will handle purges.
-        if (config("statamic.static_caching.strategies.{$static_cacher}.driver") === 'cloudflare') {
-            $this->listen = [];
-        }
-
-        parent::bootEvents();
     }
 }
