@@ -3,7 +3,7 @@
 namespace HandmadeWeb\StatamicCloudflare\Listeners;
 
 use HandmadeWeb\StatamicCloudflare\Cloudflare;
-use HandmadeWeb\StatamicCloudflare\Jobs\PurgeZone;
+use HandmadeWeb\StatamicCloudflare\Jobs\PurgeZoneUrls;
 use Statamic\Events\EntryDeleted;
 use Statamic\Events\EntrySaved;
 use Statamic\Modifiers\Modify;
@@ -40,9 +40,9 @@ class PurgeEntryUrl
             $url = $event->entry->url();
 
             if (Cloudflare::shouldQueue()) {
-                PurgeZone::dispatch($zone, [$url]);
+                PurgeZoneUrls::dispatch($zone, [$url]);
             } else {
-                PurgeZone::dispatchSync($zone, [$url]);
+                PurgeZoneUrls::dispatchSync($zone, [$url]);
             }
         }
     }

@@ -5,7 +5,7 @@ namespace HandmadeWeb\StatamicCloudflare\Cachers;
 use HandmadeWeb\StatamicCloudflare\Cloudflare;
 use HandmadeWeb\StatamicCloudflare\Jobs\PurgeEverything;
 use HandmadeWeb\StatamicCloudflare\Jobs\PurgeEverythingForZone;
-use HandmadeWeb\StatamicCloudflare\Jobs\PurgeZone;
+use HandmadeWeb\StatamicCloudflare\Jobs\PurgeZoneUrls;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Http\Request;
 use Statamic\Facades\Site;
@@ -98,9 +98,9 @@ class CloudflareCacher extends AbstractCacher
 
         Cloudflare::zones()->each(function ($zone) use ($url) {
             if (Cloudflare::shouldQueue()) {
-                PurgeZone::dispatch($zone, [$url]);
+                PurgeZoneUrls::dispatch($zone, [$url]);
             } else {
-                PurgeZone::dispatchSync($zone, [$url]);
+                PurgeZoneUrls::dispatchSync($zone, [$url]);
             }
         });
     }

@@ -11,7 +11,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Statamic\Modifiers\Modify;
 
-class PurgeZone implements ShouldQueue
+class PurgeZoneUrls implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
