@@ -141,6 +141,13 @@ In theory, you should be able to use any caching strategy here, such as the [ful
 
 ### Control Panel
 
+#### Events
+
+`statamic-cloudflare` will listen to the `Statamic\Events\EntrySaved`, `Statamic\Events\EntryDeleted`, `Statamic\Events\TermSaved` and `Statamic\Events\EntryDeleted` events and will trigger a pruge for the url.
+These events will be ignored if you have configured the `static cache` to be a strategy that uses the `cloudflare` driver, as the driver will instead handle the needed purging actions.
+
+#### Utility
+
 `statamic-cloudflare` will add a utility to your Statamic CP.
 
 route: `/cp/utilities/cloudflare`
