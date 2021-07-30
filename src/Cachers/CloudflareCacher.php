@@ -81,7 +81,7 @@ class CloudflareCacher extends AbstractCacher
             if (Cloudflare::shouldQueue()) {
                 PurgeEverythingForZone::dispatch($zone);
             } else {
-                Cloudflare::Api()->Zones()->cachePurgeEverything($zone);
+                PurgeEverythingForZone::dispatchSync($zone);
             }
         });
     }
@@ -100,7 +100,7 @@ class CloudflareCacher extends AbstractCacher
             if (Cloudflare::shouldQueue()) {
                 PurgeZone::dispatch($zone, [$url]);
             } else {
-                Cloudflare::Api()->Zones()->cachePurge($zone, [$url]);
+                PurgeZone::dispatchSync($zone, [$url]);
             }
         });
     }
@@ -115,12 +115,8 @@ class CloudflareCacher extends AbstractCacher
     {
         $this->strategy()->invalidateUrls($urls);
 
-        Cloudflare::zones()->each(function ($zone) use ($urls) {
-            if (Cloudflare::shouldQueue()) {
-                PurgeZone::dispatch($zone, $urls);
-            } else {
-                Cloudflare::Api()->Zones()->cachePurge($zone, $urls);
-            }
+        collect($urls)->each(function ($url) {
+            $this->invalidateUrl($url);
         });
     }
 
