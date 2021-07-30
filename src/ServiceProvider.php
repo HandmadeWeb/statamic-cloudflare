@@ -22,6 +22,12 @@ class ServiceProvider extends AddonServiceProvider
         \Statamic\Events\EntryDeleted::class => [
             \HandmadeWeb\StatamicCloudflare\Listeners\PurgeEntryUrl::class,
         ],
+        \Statamic\Events\TermSaved::class => [
+            \HandmadeWeb\StatamicCloudflare\Listeners\PurgeTermUrl::class,
+        ],
+        \Statamic\Events\TermDeleted::class => [
+            \HandmadeWeb\StatamicCloudflare\Listeners\PurgeTermUrl::class,
+        ],
     ];
 
     public function boot()
