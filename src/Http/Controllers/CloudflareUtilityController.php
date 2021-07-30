@@ -22,7 +22,7 @@ class CloudflareUtilityController extends CpController
             if (Cloudflare::shouldQueue()) {
                 PurgeEverythingForZone::dispatch($zone);
             } else {
-                Cloudflare::Api()->Zones()->cachePurgeEverything($zone);
+                PurgeEverythingForZone::dispatchSync($zone);
             }
         });
 
