@@ -9,6 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Statamic\Modifiers\Modify;
 
 class PurgeZone implements ShouldQueue
 {
@@ -35,6 +36,24 @@ class PurgeZone implements ShouldQueue
      */
     public function handle()
     {
-        Cloudflare::Api()->Zones()->cachePurge($this->zone, $this->urls);
+        $domain = Cloudflare::zones()->flip()->get($this->zone);
+
+        // Strip www. from domain.
+        $domain = Modify::value($domain)
+            ->removeLeft('www.')
+            ->__toString();
+
+        $urls = [];
+
+        foreach ($this->urls as $url) {
+            $urls[] = "http://{$domain}{$url}";
+            $urls[] = "https://{$domain}{$url}";
+
+            // Add www. to url.
+            $urls[] = "http://www.{$domain}{$url}";
+            $urls[] = "https://www.{$domain}{$url}";
+        }
+
+        Cloudflare::Api()->Zones()->cachePurge($this->zone, $urls);
     }
 }
