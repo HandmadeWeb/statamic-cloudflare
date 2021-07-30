@@ -152,7 +152,7 @@ You can purge everything quickly from here.
 
 ## Changelog
 
-Please see [CHANGELOG](https://github.com/handmadeweb/statamic-cloudflare/blob/main/CHANGELOG.md) for more information what has changed recently.
+Please see [CHANGELOG](https://statamic.com/addons/handmadeweb/statamic-cloudflare/release-notes) for more information what has changed recently.
 
 ## Contributing
 
