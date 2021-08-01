@@ -66,7 +66,7 @@ class CloudflareApi
         if (Cloudflare::config('key')) {
             $API = new APIKey(Cloudflare::config('email'), Cloudflare::config('key'));
         } else {
-            $API = new APIToken(Cloudflare::config('email'), Cloudflare::config('token'));
+            $API = new APIToken(Cloudflare::config('token'));
         }
 
         $this->instance = new CloudflareClient($API);
