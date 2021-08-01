@@ -38,7 +38,7 @@ class Cloudflare
     public static function isConfigured(): bool
     {
         if (is_null(static::$isConfigured)) {
-            static::$isConfigured = static::config('email') && static::config('key');
+            static::$isConfigured = static::config('email') && static::config('key') || static::config('token');
         }
 
         return static::$isConfigured;
