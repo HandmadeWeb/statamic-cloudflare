@@ -3,6 +3,12 @@
 return [
 
     /*
+     * API token generated from the User Profile 'My Profile > Api Tokens > API Tokens' page.
+     * CLOUDFLARE_KEY will take priority over CLOUDFLARE_TOKEN
+     */
+    'token' => env('CLOUDFLARE_TOKEN', null),
+
+    /*
      * Global API Key on the "My Profile > Api Tokens > API Keys" page.
      */
     'key' => env('CLOUDFLARE_KEY', null),

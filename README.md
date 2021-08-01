@@ -29,6 +29,16 @@ CLOUDFLARE_KEY=
 CLOUDFLARE_EMAIL=
 ```
 
+or
+
+```env
+CLOUDFLARE_TOKEN=
+CLOUDFLARE_EMAIL=
+```
+
+`Note that CLOUDFLARE_KEY will be used instead of CLOUDFLARE_TOKEN in the event that they are both set.
+KEY is the global api key with all possible permissions and TOKEN is a generated Api KEY/TOKEN which has specific permissions enabled/disabled.`
+
 And configure your `zones`, If you only need to specify a single zone, then you can add it to your `.env`
 
 ```env

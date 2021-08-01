@@ -4,6 +4,7 @@ namespace HandmadeWeb\StatamicCloudflare;
 
 use Cloudflare\API\Adapter\Guzzle as CloudflareClient;
 use Cloudflare\API\Auth\APIKey;
+use Cloudflare\API\Auth\APIToken;
 use HandmadeWeb\StatamicCloudflare\Traits\API\AccessRules;
 use HandmadeWeb\StatamicCloudflare\Traits\API\Accounts;
 use HandmadeWeb\StatamicCloudflare\Traits\API\API;
@@ -62,8 +63,13 @@ class CloudflareApi
 
     public function __construct()
     {
-        $APIKey = new APIKey(Cloudflare::config('email'), Cloudflare::config('key'));
-        $this->instance = new CloudflareClient($APIKey);
+        if (Cloudflare::config('key')) {
+            $API = new APIKey(Cloudflare::config('email'), Cloudflare::config('key'));
+        } else {
+            $API = new APIToken(Cloudflare::config('email'), Cloudflare::config('token'));
+        }
+
+        $this->instance = new CloudflareClient($API);
     }
 
     /**
