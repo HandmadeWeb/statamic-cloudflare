@@ -33,7 +33,6 @@ or
 
 ```env
 CLOUDFLARE_TOKEN=
-CLOUDFLARE_EMAIL=
 ```
 
 `Note that CLOUDFLARE_KEY will be used instead of CLOUDFLARE_TOKEN in the event that they are both set.
