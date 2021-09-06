@@ -182,4 +182,4 @@ Please see [CONTRIBUTING](https://github.com/handmadeweb/statamic-cloudflare/blo
 
 ## License
 
-The MIT License (MIT). Please see [License File](https://github.com/handmadeweb/statamic-cloudflare/blob/main/LICENSE.md) for more information.
+The MIT License (MIT). Please see [License File](https://github.com/handmadeweb/statamic-cloudflare/blob/main/LICENSE) for more information.
