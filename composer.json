@@ -10,8 +10,8 @@
         "cloudflare"
     ],
     "require": {
-        "php": "^7.3||^8.0",
-        "statamic/cms": ">=3.1.2 <3.2||3.2.*||3.3.*||3.4.*",
+        "php": "^8.0",
+        "statamic/cms": "^4.0",
         "cloudflare/sdk": "^1.2"
     },
     "require-dev": {
