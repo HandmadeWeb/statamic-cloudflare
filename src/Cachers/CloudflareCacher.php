@@ -3,14 +3,11 @@
 namespace HandmadeWeb\StatamicCloudflare\Cachers;
 
 use HandmadeWeb\StatamicCloudflare\Cloudflare;
-use HandmadeWeb\StatamicCloudflare\Jobs\PurgeEverything;
 use HandmadeWeb\StatamicCloudflare\Jobs\PurgeEverythingForZone;
 use HandmadeWeb\StatamicCloudflare\Jobs\PurgeZoneUrls;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Http\Request;
-use Statamic\Facades\Site;
 use Statamic\StaticCaching\Cachers\AbstractCacher;
-use Statamic\StaticCaching\Cachers\ApplicationCacher;
 use Statamic\StaticCaching\StaticCacheManager;
 
 class CloudflareCacher extends AbstractCacher
@@ -38,8 +35,8 @@ class CloudflareCacher extends AbstractCacher
     /**
      * Cache a page.
      *
-     * @param \Illuminate\Http\Request $request     Request associated with the page to be cached
-     * @param string                   $content     The response content to be cached
+     * @param \Illuminate\Http\Request  $request  Request associated with the page to be cached
+     * @param string  $content  The response content to be cached
      */
     public function cachePage(Request $request, $content)
     {

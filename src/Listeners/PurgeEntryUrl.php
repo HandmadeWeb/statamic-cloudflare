@@ -12,9 +12,7 @@ class PurgeEntryUrl
 {
     public function handle($event)
     {
-        /*
-         * The entry is not being saved or deleted? Skip.
-         */
+        // The entry is not being saved or deleted? Skip.
         if (! $event instanceof EntrySaved || ! $event instanceof EntryDeleted) {
             return;
         }

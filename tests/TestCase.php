@@ -55,6 +55,7 @@ class TestCase extends OrchestraTestCase
 
     /**
      * Resolve the Application Configuration and set the Statamic configuration.
+     *
      * @param \Illuminate\Foundation\Application $app
      */
     protected function resolveApplicationConfiguration($app): void
@@ -67,7 +68,7 @@ class TestCase extends OrchestraTestCase
         ];
 
         foreach ($configs as $config) {
-            $app['config']->set("statamic.$config", require(__DIR__."/../vendor/statamic/cms/config/{$config}.php"));
+            $app['config']->set("statamic.{$config}", require(__DIR__."/../vendor/statamic/cms/config/{$config}.php"));
         }
 
         // Setting the user repository to the default flat file system

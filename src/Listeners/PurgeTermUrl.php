@@ -12,9 +12,7 @@ class PurgeTermUrl
 {
     public function handle($event)
     {
-        /*
-         * The term is not being saved or deleted? Skip.
-         */
+        // The term is not being saved or deleted? Skip.
         if (! $event instanceof TermSaved || ! $event instanceof TermDeleted) {
             return;
         }

@@ -5,9 +5,7 @@ namespace HandmadeWeb\StatamicCloudflare\Http\Controllers;
 use HandmadeWeb\StatamicCloudflare\Cloudflare;
 use HandmadeWeb\StatamicCloudflare\Jobs\PurgeEverythingForZone;
 use Illuminate\Http\Request;
-use Statamic\Facades\Site;
 use Statamic\Http\Controllers\CP\CpController;
-use Statamic\Modifiers\Modify;
 
 class CloudflareUtilityController extends CpController
 {

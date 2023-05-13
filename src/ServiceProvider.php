@@ -46,9 +46,7 @@ class ServiceProvider extends AddonServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/statamic-cloudflare.php', 'statamic-cloudflare');
 
         if ($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__.'/../config/statamic-cloudflare.php' => config_path('statamic-cloudflare.php'),
-            ], 'config');
+            $this->publishes([__DIR__.'/../config/statamic-cloudflare.php' => config_path('statamic-cloudflare.php')], 'config');
         }
 
         // Enable functionality if Cloudflare Api has been configured.
