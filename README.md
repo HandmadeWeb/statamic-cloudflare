@@ -6,7 +6,7 @@ Inspired by [sebdesign/artisan-cloudflare](https://github.com/sebdesign/artisan-
 
 ## Requirements
 
-* Statamic 3.1.2 or higher
+* Statamic 4.0.0 or higher
 
 ## Installation
 
