@@ -3,14 +3,11 @@
 namespace HandmadeWeb\StatamicCloudflare\Cachers;
 
 use HandmadeWeb\StatamicCloudflare\Cloudflare;
-use HandmadeWeb\StatamicCloudflare\Jobs\PurgeEverything;
 use HandmadeWeb\StatamicCloudflare\Jobs\PurgeEverythingForZone;
 use HandmadeWeb\StatamicCloudflare\Jobs\PurgeZoneUrls;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Http\Request;
-use Statamic\Facades\Site;
 use Statamic\StaticCaching\Cachers\AbstractCacher;
-use Statamic\StaticCaching\Cachers\ApplicationCacher;
 use Statamic\StaticCaching\StaticCacheManager;
 
 class CloudflareCacher extends AbstractCacher
@@ -18,7 +15,7 @@ class CloudflareCacher extends AbstractCacher
     protected $strategy;
 
     /**
-     * @param Repository $cache
+     * @param  Repository  $cache
      */
     public function __construct(Repository $cache, $config)
     {
@@ -38,8 +35,8 @@ class CloudflareCacher extends AbstractCacher
     /**
      * Cache a page.
      *
-     * @param \Illuminate\Http\Request $request     Request associated with the page to be cached
-     * @param string                   $content     The response content to be cached
+     * @param  \Illuminate\Http\Request  $request  Request associated with the page to be cached
+     * @param  string  $content  The response content to be cached
      */
     public function cachePage(Request $request, $content)
     {
@@ -49,7 +46,7 @@ class CloudflareCacher extends AbstractCacher
     /**
      * Check if a page has been cached.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return bool
      */
     public function hasCachedPage(Request $request)
@@ -60,7 +57,7 @@ class CloudflareCacher extends AbstractCacher
     /**
      * Get a cached page.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return string
      */
     public function getCachedPage(Request $request)
@@ -89,7 +86,7 @@ class CloudflareCacher extends AbstractCacher
     /**
      * Invalidate a URL.
      *
-     * @param string $url
+     * @param  string  $url
      * @return void
      */
     public function invalidateUrl($url)
@@ -108,7 +105,7 @@ class CloudflareCacher extends AbstractCacher
     /**
      * Invalidate multiple URLs.
      *
-     * @param array $urls
+     * @param  array  $urls
      * @return void
      */
     public function invalidateUrls($urls)
@@ -123,7 +120,7 @@ class CloudflareCacher extends AbstractCacher
     /**
      * Get all the URLs that have been cached.
      *
-     * @param string|null $domain
+     * @param  string|null  $domain
      * @return \Illuminate\Support\Collection
      */
     public function getUrls($domain = null)

@@ -12,7 +12,7 @@ use Statamic\Statamic;
 class TestCase extends OrchestraTestCase
 {
     /**
-     * @param \Illuminate\Foundation\Application $app
+     * @param  \Illuminate\Foundation\Application  $app
      * @return array
      */
     protected function getPackageProviders($app): array
@@ -24,7 +24,7 @@ class TestCase extends OrchestraTestCase
     }
 
     /**
-     * @param \Illuminate\Foundation\Application $app
+     * @param  \Illuminate\Foundation\Application  $app
      * @return array
      */
     protected function getPackageAliases($app): array
@@ -35,7 +35,7 @@ class TestCase extends OrchestraTestCase
     }
 
     /**
-     * @param \Illuminate\Foundation\Application $app
+     * @param  \Illuminate\Foundation\Application  $app
      */
     protected function getEnvironmentSetUp($app): void
     {
@@ -55,7 +55,8 @@ class TestCase extends OrchestraTestCase
 
     /**
      * Resolve the Application Configuration and set the Statamic configuration.
-     * @param \Illuminate\Foundation\Application $app
+     *
+     * @param  \Illuminate\Foundation\Application  $app
      */
     protected function resolveApplicationConfiguration($app): void
     {
@@ -67,7 +68,7 @@ class TestCase extends OrchestraTestCase
         ];
 
         foreach ($configs as $config) {
-            $app['config']->set("statamic.$config", require(__DIR__."/../vendor/statamic/cms/config/{$config}.php"));
+            $app['config']->set("statamic.{$config}", require(__DIR__."/../vendor/statamic/cms/config/{$config}.php"));
         }
 
         // Setting the user repository to the default flat file system

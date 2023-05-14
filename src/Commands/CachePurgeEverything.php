@@ -2,7 +2,6 @@
 
 namespace HandmadeWeb\StatamicCloudflare\Commands;
 
-use Exception;
 use HandmadeWeb\StatamicCloudflare\Cloudflare;
 use Illuminate\Console\Command;
 use Statamic\Console\RunsInPlease;
@@ -45,7 +44,7 @@ class CachePurgeEverything extends Command
                 Cloudflare::Api()->Zones()->cachePurgeEverything($zone);
 
                 $this->info('Successfully purged everything from: '.Cloudflare::zones()->flip()->get($zone));
-            } catch (Exception $exception) {
+            } catch (\Exception $exception) {
                 $this->error('Failed to purge: '.Cloudflare::zones()->flip()->get($zone));
             }
         });
