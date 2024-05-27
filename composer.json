@@ -11,7 +11,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "statamic/cms": "^4.0",
+        "statamic/cms": "^4.0||^5.0",
         "cloudflare/sdk": "^1.2"
     },
     "require-dev": {
